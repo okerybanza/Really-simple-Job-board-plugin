@@ -87,7 +87,7 @@ add_action('wp_enqueue_scripts', function() {
         'ajax_url' => admin_url('admin-ajax.php'),
         'max_size' => SJB_MAX_FILE_SIZE,
         'max_files' => SJB_MAX_FILE_UPLOADS,
-        'allowed_types' => SJB_ALLOWED_FILE_TYPES,
+        'allowed_types' => SJB_ALLOWED_FILE_TYPES, 
         'i18n' => [
             'submit_text' => __('Submit Application', 'simple-job-board'),
             'submitting_text' => __('Submitting...', 'simple-job-board'),
