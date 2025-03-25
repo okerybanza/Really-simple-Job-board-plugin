@@ -1,0 +1,11 @@
+#sjb-calendar {
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+.fc-event {
+    background-color: #2271b1;
+    border-color: #1a5a8a;
+    cursor: pointer;
+}
