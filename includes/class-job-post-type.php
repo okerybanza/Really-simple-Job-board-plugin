@@ -1,30 +1,36 @@
 <?php
+if (!defined('ABSPATH')) exit;
+
 class SJB_Job_Post_Type {
     public static function register() {
+        // Ensure WordPress environment is loaded
+        global $wp_rewrite;
+
+        // Register post type on 'init' hook properly
+        add_action('init', [__CLASS__, 'register_job_post_type'], 10);
+    }
+
+    public static function register_job_post_type() {
         $labels = [
-            'name' => __('Jobs', 'simple-job-board'),
-            'singular_name' => __('Job', 'simple-job-board'),
-            'menu_name' => __('Job Board', 'simple-job-board'),
-            'add_new' => __('Add New Job', 'simple-job-board'),
-            'add_new_item' => __('Add New Job', 'simple-job-board'),
-            'edit_item' => __('Edit Job', 'simple-job-board'),
-            'new_item' => __('New Job', 'simple-job-board'),
-            'view_item' => __('View Job', 'simple-job-board'),
-            'search_items' => __('Search Jobs', 'simple-job-board'),
-            'not_found' => __('No jobs found', 'simple-job-board'),
-            'not_found_in_trash' => __('No jobs found in Trash', 'simple-job-board'),
+            'name' => __('Jobs'),
+            'singular_name' => __('Job'),
+            'menu_name' => __('Job Board'),
+            // Add other labels as needed
         ];
 
         $args = [
             'labels' => $labels,
             'public' => true,
             'has_archive' => true,
-            'menu_icon' => 'dashicons-clipboard',
-            'supports' => ['title', 'editor', 'thumbnail'],
             'rewrite' => ['slug' => 'jobs'],
-            'show_in_rest' => true,
+            'supports' => ['title', 'editor', 'thumbnail'],
+            'show_in_rest' => true, // Enable Gutenberg editor
+            'capability_type' => 'post',
         ];
 
-        register_post_type('sjb_job', $args);
+        register_post_type('job', $args);
+
+        // Flush rewrite rules on plugin activation
+        flush_rewrite_rules(false);
     }
 }
